@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhaval Jadav - Data Analyst Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #050816;
+      --bg-elevated: #0f172a;
+      --accent: #22d3ee;
+      --accent-soft: rgba(34, 211, 238, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* animated background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(59, 130, 246, 0.25), transparent 60%);
+      opacity: 0.4;
+      z-index: -1;
+      animation: bgPulse 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes bgPulse {
+      0% { transform: scale(1) translate3d(0,0,0); opacity: 0.28; }
+      50% { transform: scale(1.05) translate3d(0,-10px,0); opacity: 0.46; }
+      100% { transform: scale(1.08) translate3d(0,6px,0); opacity: 0.38; }
+    }
+
+    header {
+      padding: 72px 20px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display:flex;
+      flex-direction:row;
+      justify-content:center;
+      align-items:center;
+      gap:32px;
+      flex-wrap:wrap;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align:left;
+    }
+
+    header p {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-top: 14px;
+      text-align:left;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.9);
+    }
+
+    .section {
+      max-width: 1080px;
+      margin: auto;
+      padding: 40px 20px 20px;
+    }
+
+    .section-inner {
+      background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.06), transparent 55%),
+                  linear-gradient(to bottom right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      border-radius: 24px;
+      padding: 32px 26px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(148, 163, 184, 0.6), transparent);
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 720px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .skills-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skills-list span::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.2), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .skills-list span:hover::before {
+      opacity: 1;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 18px;
+    }
+
+    .project-card {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 20px;
+      padding: 20px 18px;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease-out, box-shadow 0.22s ease-out, border-color 0.22s ease-out;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+      border-color: rgba(56, 189, 248, 0.7);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr);
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .contact-details {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .contact-details a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-card {
+      border-radius: 20px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      padding: 18px 16px;
+      background: radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 60%);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .pill-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22d3ee, #38bdf8);
+      color: #020617;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+    }
+
+    .pill-cta span {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px 18px 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer span {
+      color: var(--accent);
+    }
+
+    /* hero + photo animation */
+    @keyframes fadeInUp {
+      0% {opacity:0; transform: translateY(20px);}
+      100% {opacity:1; transform: translateY(0);}
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow:0 0 18px rgba(34,211,238,0.25);}
+      50% { box-shadow:0 0 32px rgba(34,211,238,0.55);}
+      100% { box-shadow:0 0 18px rgba(34,211,238,0.25);}
+    }
+
+    .hero-animate {
+      animation: fadeInUp 1.1s ease-out forwards;
+    }
+
+    .photo-3d {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      animation: glowPulse 4s infinite ease-in-out;
+    }
+
+    .photo-3d:hover {
+      transform: rotateY(12deg) rotateX(6deg) scale(1.06);
+      box-shadow:0 28px 60px rgba(34,211,238,0.45);
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* floating buttons */
+    .floating-cta {
+      position: fixed;
+      right: 20px;
+      bottom: 22px;
+      z-index: 20;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.9);
+      background: radial-gradient(circle at top left, #22d3ee, #0ea5e9);
+      color: #020617;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      text-decoration:none;
+    }
+
+    .floating-cta span {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    .floating-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 1);
+    }
+
+    .floating-cta:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    /* WhatsApp floating special */
+    @keyframes whatsappBounce {
+      0% { transform: translateY(0); box-shadow:0 16px 40px rgba(0,0,0,0.45); }
+      20% { transform: translateY(-4px); box-shadow:0 20px 46px rgba(0,0,0,0.6); }
+      40% { transform: translateY(0); box-shadow:0 16px 40px rgba(0,0,0,0.45); }
+      60% { transform: translateY(-2px); box-shadow:0 18px 44px rgba(0,0,0,0.55); }
+      100% { transform: translateY(0); box-shadow:0 16px 40px rgba(0,0,0,0.45); }
+    }
+
+    .floating-cta.whatsapp {
+      bottom: 80px;
+      background:linear-gradient(to right,#25D366,#128C7E);
+      border:1px solid #25D366;
+      color:white;
+      animation: whatsappBounce 2.4s infinite ease-in-out;
+    }
+
+    /* top social icons */
+    .top-socials {
+      position:absolute;
+      top:22px;
+      right:22px;
+      display:flex;
+      gap:14px;
+    }
+
+    .top-icon .icon-circle {
+      width:34px;
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow:0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .top-icon:hover .icon-circle {
+      transform:scale(1.18);
+      box-shadow:0 0 18px rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding: 52px 18px 40px;
+        flex-direction:column;
+      }
+      header h1 {
+        font-size: 32px;
+      }
+      .section-inner {
+        padding: 24px 18px;
+      }
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .floating-cta {
+        right: 16px;
+        bottom: 16px;
+        padding: 9px 14px;
+        font-size: 12px;
+      }
+      .floating-cta.whatsapp {
+        bottom:70px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero-animate">
+  <img src="https://testy-salmon-bouxqhw5xx-8yepuic37g.edgeone.dev/WhatsApp%20Image%202025-02-13%20at%2012.29.28%20PM.jpeg" 
+       alt="Dhaval Jadav" 
+       class="photo-3d"
+       style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);" />
+
+  <div style="max-width:420px;text-align:left;">
+    <div class="badge"><div class="badge-dot"></div> DATA ANALYST PORTFOLIO</div>
+    <h1>Dhaval Jadav</h1>
+    <p>Data Analyst • Power BI Specialist • Web Scraping Expert</p>
+  </div>
+
+  <div class="top-socials">
+    <!-- WhatsApp Icon -->
+    <a href="https://wa.me/918153041320?text=Hello%20Dhaval,%20I%20need%20your%20data%20analytics%20help" target="_blank" class="top-icon">
+      <div class="icon-circle" style="background:#25D366; border-radius:50%;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.03-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- LinkedIn Icon -->
+    <a href="https://www.linkedin.com/in/dhaval-jadav1603" target="_blank" class="top-icon">
+      <div class="icon-circle" style="background:#0A66C2; border-radius:6px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.026-3.059-1.865-3.059-1.867 0-2.155 1.459-2.155 2.964v5.699h-3v-11h2.881v1.507h.041c.401-.761 1.379-1.562 2.837-1.562 3.034 0 3.6 2.014 3.6 4.634v6.421z"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Gmail Icon -->
+    <a href="mailto:dhavaljadav1603@gmail.com" class="top-icon">
+      <div class="icon-circle" style="background:white; border-radius:6px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path fill="#EA4335" d="M12 12.713l-11.985-9.713h23.97z"/>
+          <path fill="#4285F4" d="M12 12.713l11.985-9.713v17.297z"/>
+          <path fill="#34A853" d="M12 12.713l-11.985 7.584h23.97z"/>
+          <path fill="#FBBC05" d="M0 3v17.297l11.985-7.584z"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- GitHub Icon -->
+    <a href="https://github.com/Dhaval1603" target="_blank" class="top-icon">
+      <div class="icon-circle" style="background:#000; border-radius:50%;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+          <path d="M12 .5C5.649.5.5 5.651.5 12.001c0 5.086 3.292 9.388 7.863 10.905.575.105.787-.25.787-.556 0-.273-.01-.999-.015-1.961-3.201.695-3.877-1.544-3.877-1.544-.523-1.33-1.278-1.684-1.278-1.684-1.044-.714.079-.7.079-.7 1.155.081 1.764 1.188 1.764 1.188 1.026 1.758 2.692 1.251 3.347.957.104-.744.401-1.251.729-1.539-2.554-.293-5.238-1.278-5.238-5.687 0-1.256.449-2.282 1.184-3.085-.119-.293-.513-1.473.112-3.07 0 0 .967-.31 3.166 1.181a11.02 11.02 0 0 1 2.886-.389c.979.005 1.964.133 2.887.389 2.197-1.491 3.162-1.181 3.162-1.181.627 1.597.234 2.777.115 3.07.737.803 1.183 1.829 1.183 3.085 0 4.421-2.69 5.389-5.253 5.676.413.355.78 1.047.78 2.111 0 1.524-.014 2.754-.014 3.131 0 .31.208.667.793.553C20.21 21.385 23.5 17.084 23.5 12 23.5 5.651 18.351.5 12 .5z"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-title">About Me</div>
+  <p class="about-text">
+    My name is <strong>Dhaval Jadav</strong>, and I am a data analyst skilled in Power BI, Excel, SQL, Python, and Web Scraping. 
+    I help businesses convert raw data into meaningful insights, dashboards, automations, and decision-ready reports. 
+    My goal is to transform complex data into smart, actionable strategies through analytics.
+  </p>
+</section>
+
+<section class="section reveal">
+  <div class="section-title">Skills</div>
+  <div class="skills-list">
+    <span>Power BI</span>
+    <span>Excel</span>
+    <span>SQL</span>
+    <span>Python</span>
+    <span>Web Scraping</span>
+    <span>Data Cleaning</span>
+    <span>DAX</span>
+    <span>Data Visualization</span>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-title">Projects</div>
+  <div class="projects">
+    <div class="project-card">
+      <h3>Sales Dashboard – Power BI</h3>
+      <p>Created an interactive dashboard showing KPIs, trends, region-wise breakdown, and performance insights.</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Web Scraping Automation</h3>
+      <p>Built Python-based scraper to extract product details, pricing, and images into structured formats.</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Excel Reporting Automation</h3>
+      <p>Automated weekly and monthly reports using Power Query and advanced Excel formulas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner reveal">
+    <div class="section-subtitle">Let's Collaborate</div>
+    <div class="section-title">Contact</div>
+    <div class="contact-grid">
+      <div class="contact-details">
+        <p>
+          📩 Email:<br>
+          <a href="mailto:dhavaljadav1603@gmail.com">dhavaljadav1603@gmail.com</a>
+        </p>
+        <p>
+          📱 Phone / WhatsApp:<br>
+          <a href="tel:+918153041320">+91 8153041320</a><br>
+          <a href="https://wa.me/918153041320?text=Hello%20Dhaval,%20I%20need%20your%20data%20analytics%20help" target="_blank">
+            Chat on WhatsApp
+          </a>
+        </p>
+        <p>
+          🔗 LinkedIn:<br>
+          <a href="https://www.linkedin.com/in/dhaval-jadav1603" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:8px;color:#22d3ee;text-decoration:none;margin-top:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2" style="border-radius:4px;">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.026-3.059-1.865-3.059-1.867 0-2.155 1.459-2.155 2.964v5.699h-3v-11h2.881v1.507h.041c.401-.761 1.379-1.562 2.837-1.562 3.034 0 3.6 2.014 3.6 4.634v6.421z"/>
+            </svg>
+            linkedin.com/in/dhaval-jadav1603
+          </a>
+        </p>
+        <a class="pill-cta" href="mailto:dhavaljadav1603@gmail.com?subject=Let%27s%20Talk%20About%20Your%20Data">
+          Let's talk about your data <span>→</span>
+        </a>
+      </div>
+      <div class="contact-card">
+        <strong>Available for:</strong>
+        <ul>
+          <li>Freelance dashboards & reports</li>
+          <li>Ongoing data analysis support</li>
+          <li>Web scraping & automation projects</li>
+        </ul>
+        <p style="margin-top: 6px;">Send me your problem in one line — I will reply with how I can help and a rough approach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Dhaval Jadav | Data Analyst Portfolio
+</footer>
+
+<!-- Floating Email CTA -->
+<a class="floating-cta" href="mailto:dhavaljadav1603@gmail.com?subject=Freelance%20Data%20Analytics%20Project">
+  Hire Me <span>↗</span>
+</a>
+
+<!-- Floating WhatsApp CTA -->
+<a href="https://wa.me/918153041320?text=Hello%20Dhaval,%20I%20need%20your%20data%20analytics%20help" 
+   class="floating-cta whatsapp">
+  💬 WhatsApp <span>↗</span>
+</a>
+
+<script>
+  // Simple scroll reveal using IntersectionObserver
+  (function() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || !reveals.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  })();
+</script>
+
+</body>
+</html>
